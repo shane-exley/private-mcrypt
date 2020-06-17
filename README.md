@@ -24,7 +24,7 @@ CGO_ENABLED=1
 ## Usage
 
 ```
-mcrypt "github.com/shane-exley/private-mcrypt"
+import mcrypt "github.com/shane-exley/private-mcrypt"
 ```
 
 ### Use to Encrypt

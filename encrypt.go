@@ -11,7 +11,7 @@ import (
 // Encrypt takes a given value and encrypts using mcrypt and the provided key,
 // and makes it URL safe
 func Encrypt(raw, key string) (val string, err error) {
-	if len(key) != 64 {
+	if len(key) != keyLength {
 		err = fmt.Errorf("provided key does not satisfy the key length of 64 chars")
 		return
 	}

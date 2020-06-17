@@ -10,7 +10,7 @@ import (
 
 // Decrypt takes a given value and decrypts using mcrypt
 func Decrypt(cipher, key string) (raw string, err error) {
-	if len(key) != 64 {
+	if len(key) != keyLength {
 		err = fmt.Errorf("provided key does not satisfy the key length of 64 chars")
 		return
 	}
