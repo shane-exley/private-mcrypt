@@ -20,3 +20,21 @@ Go build argument should include:
 ```
 CGO_ENABLED=1
 ```
+
+## Usage
+
+```
+mcrypt "github.com/shane-exley/private-mcrypt"
+```
+
+### Use to Encrypt
+
+```
+encrypted, err := mcrypt.Encrypt("Secret", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910")
+```
+
+### Use to Decrypt
+
+```
+decrypted, err := mcrypt.Decrypt(encryted, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910")
+```
