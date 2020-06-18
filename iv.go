@@ -12,7 +12,7 @@ func iv(cipher, mode string) ([]byte, int, error) {
 	var iv []byte
 	var size int
 
-	switch strings.ToLower(cipher) + "/" + strings.ToLower(mode) {
+	switch strings.ToLower(cipher + "/" + mode) {
 	case cipherRijndael128 + "/" + modeCBC:
 		b := make([]byte, 16)
 		rand.Read(b)
