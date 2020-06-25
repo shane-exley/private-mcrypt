@@ -44,34 +44,60 @@ func Test_EncryptionDecrytion(t *testing.T) {
 	const key = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910"
 
 	var tests = []struct {
-		message string
+		message, rfc string
 	}{
+		// uses default RFC4648_5
 		{
-			"secure message",
+			message: "secure message",
 		},
 		{
-			"secure & message",
+			message: "secure & message",
 		},
 		{
-			"test.html",
+			message: "test.html",
 		},
 		{
-			"image.jpg",
+			message: "image.jpg",
 		},
 		{
-			"test123@example.com",
+			message: "test123@example.com",
 		},
 		{
-			"test1@example.com,test2@example.com\ntest3@example.com,test4@example.com\ntest5@example.com,test6@example.com\n",
+			message: "test1@example.com,test2@example.com\ntest3@example.com,test4@example.com\ntest5@example.com,test6@example.com\n",
+		},
+		// uses RFC4648_4
+		{
+			message: "secure message",
+			rfc:     RFC4648_4,
+		},
+		{
+			message: "secure & message",
+			rfc:     RFC4648_4,
+		},
+		{
+			message: "test.html",
+			rfc:     RFC4648_4,
+		},
+		{
+			message: "image.jpg",
+			rfc:     RFC4648_4,
+		},
+		{
+			message: "test123@example.com",
+			rfc:     RFC4648_4,
+		},
+		{
+			message: "test1@example.com,test2@example.com\ntest3@example.com,test4@example.com\ntest5@example.com,test6@example.com\n",
+			rfc:     RFC4648_4,
 		},
 	}
 
 	for k, test := range tests {
 		t.Run(fmt.Sprintf("#%d", k), func(t *testing.T) {
-			e, err = Encrypt(test.message, key)
+			e, err = Encrypt(test.message, key, test.rfc)
 			assert.Nil(t, err)
 
-			d, err = Decrypt(e, key)
+			d, err = Decrypt(e, key, test.rfc)
 			assert.Nil(t, err)
 			assert.Equal(t, test.message, d)
 		})
