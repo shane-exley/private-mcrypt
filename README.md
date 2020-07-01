@@ -30,7 +30,7 @@ import mcrypt "github.com/shane-exley/private-mcrypt"
 To address a common issue with a lot of issues rasied with application handling of URL params that have
 As per [RFC variant documentation](https://en.wikipedia.org/wiki/Base64#Variants_summary_table), variant RFC 4648 §5 base64 encoded values such as slashes are not safe regardless of being URL escaped as most applications will decode the percent-encoding too early in the process of normalising, security-escaping, and processing the URL. To address this, the default encryption is compliant with RFC4648 §5 and to apply RFC4648 §4 you can pass an additional param, using the package constant RFC4648_4; see below examples for both. It is important to note that where most cross encryptions will work, there will be a select number that do not. So encrypting using RFC 4648 §4 will require decrytion in RFC 4648 §4, and the same applies for RFC 4648 §5.
 
-## RFC 4648 §4
+## RFC 4648 §4 (RFC4648_4)
 
 ### Usage for encryption
 
@@ -45,7 +45,7 @@ decrypted, err := mcrypt.Decrypt(encryted, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJ
 fmt.Println(decrypted) // prints "This is my secret I want to hide from the world"
 ```
 
-## RFC 4648 §5
+## RFC 4648 §5 (Default | RFC4648_5)
 
 ### Usage for encryption
 
