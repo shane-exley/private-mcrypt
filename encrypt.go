@@ -39,7 +39,7 @@ func out(b []byte, rfc []string) string {
 	val := base64.StdEncoding.EncodeToString(b)
 
 	val = strings.Replace(val, "+", "-", -1)
-	val = strings.Replace(val, "\\", "_", -1)
+	val = strings.Replace(val, "/", "_", -1)
 	val = strings.TrimRight(val, "=")
 
 	return url.QueryEscape(val)

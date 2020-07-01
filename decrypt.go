@@ -34,13 +34,13 @@ func in(s string, rfc []string) ([]byte, error) {
 	if len(rfc) > 0 {
 		switch strings.ToUpper(rfc[0]) {
 		case RFC4648_4:
-			return base64.StdEncoding.DecodeString(val)
+			return base64.StdEncoding.DecodeString(strings.TrimSpace(val))
 		}
 	}
 
 	// default is RFC4648_5, this means swpping back the previously swapped characters
-	v := strings.Replace(val, "-", "+", -1)
-	v = strings.Replace(v, "_", "\\", -1)
+	v := strings.Replace(strings.TrimSpace(val), "-", "+", -1)
+	v = strings.Replace(v, "_", "/", -1)
 	// lets pad with the "="
 	v = func(str string, length int, pad string) string {
 		padding := func(str string, n int) string {
@@ -50,7 +50,7 @@ func in(s string, rfc []string) ([]byte, error) {
 			return strings.Repeat(str, n)
 		}(pad, 4-length)
 		return str + padding
-	}(v, (len(val) % 4), "=")
+	}(v, (len(strings.TrimSpace(val)) % 4), "=")
 
 	return base64.StdEncoding.DecodeString(v)
 }
