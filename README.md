@@ -21,6 +21,8 @@ Go build argument should include:
 CGO_ENABLED=1
 ```
 
+Alternatively to run on your local machine without Docker, `brew install mcrypt`
+
 ## Usage
 
 ```
