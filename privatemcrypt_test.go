@@ -103,3 +103,20 @@ func Test_EncryptionDecrytion(t *testing.T) {
 		})
 	}
 }
+
+func Test_DecrytionBackwardsCompatibility(t *testing.T) {
+	const key = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910"
+
+	for k := 0; k < 5000; k++ {
+		t.Run(fmt.Sprintf("#%d", k), func(t *testing.T) {
+			// encrypt value in RFC4648 §4 format
+			e, err := Encrypt(fmt.Sprintf("Test #%d", k), key, RFC4648_4)
+			assert.Nil(t, err)
+
+			// decrypt value in RFC4648 §5 format
+			d, err := Decrypt(e, key, RFC4648_5)
+			assert.Nil(t, err)
+			assert.Equal(t, fmt.Sprintf("Test #%d", k), d)
+		})
+	}
+}
