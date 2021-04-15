@@ -2,6 +2,7 @@ package privatemcrypt
 
 import (
 	"encoding/base64"
+	"errors"
 	"fmt"
 	"net/url"
 	"strings"
@@ -38,7 +39,7 @@ func in(s string, rfc []string) ([]byte, error) {
 		}
 	}
 
-	// default is RFC4648_5, this means swpping back the previously swapped characters
+	// default is RFC4648_5, this means swapping back the previously swapped characters
 	v := strings.Replace(strings.TrimSpace(val), "-", "+", -1)
 	v = strings.Replace(v, "_", "/", -1)
 	// lets pad with the "="
@@ -63,8 +64,11 @@ func decrypt(encrypted []byte, key string) (string, error) {
 	}
 
 	en := string(encrypted)
-	iv := en[0:size]
+	if len(en) <= size {
+		return "", errors.New("bad attempt at decryption")
+	}
 
+	iv := en[0:size]
 	if len(iv) != size {
 		return "", fmt.Errorf("encrypted value iv length incompatible match to cipher type: received %d", len(iv))
 	}
