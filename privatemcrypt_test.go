@@ -9,6 +9,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func Test_Test_EncryptionDecrytionFailure(t *testing.T) {
+	var err error
+	_, err = Decrypt("bad", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910", RFC4648_4)
+	assert.NotNil(t, err)
+
+	_, err = Decrypt("bad", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910")
+	assert.NotNil(t, err)
+}
+
 func Test_EncryptionDecrytionErr(t *testing.T) {
 	var err error
 
