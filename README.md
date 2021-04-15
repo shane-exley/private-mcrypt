@@ -37,13 +37,13 @@ As per [RFC variant documentation](https://en.wikipedia.org/wiki/Base64#Variants
 ### Usage for encryption
 
 ```
-encrypted, err := mcrypt.Encrypt("This is my secret I want to hide from the world", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910", RFC4648_4)
+encrypted, err := mcrypt.Encrypt("This is my secret I want to hide from the world", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910", mcrypt.RFC4648_4)
 ```
 
 ### Usage for decryption
 
 ```
-decrypted, err := mcrypt.Decrypt(encryted, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910", RFC4648_4)
+decrypted, err := mcrypt.Decrypt(encrypted, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910", mcrypt.RFC4648_4)
 fmt.Println(decrypted) // prints "This is my secret I want to hide from the world"
 ```
 
@@ -58,6 +58,6 @@ encrypted, err := mcrypt.Encrypt("This is my secret I want to hide from the worl
 ### Usage for decryption
 
 ```
-decrypted, err := mcrypt.Decrypt(encryted, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910")
+decrypted, err := mcrypt.Decrypt(encrypted, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345678910")
 fmt.Println(decrypted) // prints "This is my secret I want to hide from the world"
 ```
